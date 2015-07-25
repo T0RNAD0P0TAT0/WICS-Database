@@ -1,0 +1,23 @@
+drop database if exists db;
+create database db;
+use db;
+
+create table person(
+    pemail varchar(20) not null,
+    pname varchar(20),
+    gender char(1), # enum m f other
+    major varchar(10), # enum from majors or other 
+    year varchar(10), 
+    points int,
+    last_attendance_date date,
+    primary key(pemail)
+);
+
+create table event_attendance(
+	ename varchar(20),
+    edate date,
+    pname varchar(20),
+    pemail varchar(20) not null,
+    primary key(ename, pemail),
+	foreign key(pemail) references person(pemail) on delete cascade
+);
